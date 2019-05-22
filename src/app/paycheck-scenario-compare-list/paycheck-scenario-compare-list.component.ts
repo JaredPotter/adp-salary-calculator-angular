@@ -19,7 +19,7 @@ export class PaycheckScenarioCompareListComponent implements OnInit {
         scenarioName: 'Navitaire 1',
         checkDate: new Date(),
         state: 'UT',
-        grossPay: 0,
+        grossPay: 1000000,
         grossPayMethod: 'ANNUALLY',
         grossPayYTD: 0,
         payFrequency: 'SEMI_MONTHLY',

@@ -1,4 +1,81 @@
-<app-paycheck-scenario
-  *ngFor="let paycheckScenario of paycheckScenarios"
-  [paycheckScenario]="paycheckScenario"
-></app-paycheck-scenario>
+<div class="paycheck-scenario-compare-list-container">
+    <div>
+        <h2>General Information</h2>
+        <hr>
+        <div>
+          <label for="name">Paycheck Scenario Name</label>
+        </div>
+        <div>
+          <label for="date">Check Date:</label>
+        </div>
+        <div>
+          <label for="state">State</label>
+        </div>
+        <div>
+          <label for="grossPay">Gross Pay:</label>
+        </div>
+        <div>
+          <label for="grossPayMethod">Gross Pay Method</label>
+        </div>
+        <div>
+          <label for="GrossPayYTD">Gross Pay YTD:</label>
+        </div>
+        <div>
+          <label for="payFrequency">Pay Frequency</label>
+        </div>
+        <div>
+          <div>
+            <label for="exemptFederal">Exempt Federal</label>
+          </div>
+          <div>
+            <label for="exemptFica">Exempt Fica</label>
+          </div>
+          <div>
+            <label for="exemptMedicare">Exempt Medicare</label>
+          </div>
+        </div>
+        <h2>Federal Information</h2>
+        <hr>
+        <div>
+          <label for="federalFilingStatus">Federal Filing Status</label>
+        </div>
+        <div>
+          <label for="numberOfFederalAllowances"># of Federal Allowances</label>
+        </div>
+        <div>
+          <label for="additionalFederalWithholding">Additional Federal Withholding</label>
+        </div>
+        <div>
+          <label for="roundFederalWithholding">Round Federal Withholding</label>
+        </div>
+        <h2>State Information</h2>
+        <hr>
+        <div>
+          <label for="exemptState">Exempt State</label>
+        </div>
+        <div>
+          <label for="stateFilingStatus">Filing Status</label>
+        </div>
+        <div>
+          <label for="additionalStateWithholding">Additional State Withholding</label>
+        </div>
+        <h2>Local Information</h2>
+        <hr>
+        <div>
+          No Locale Information Required
+        </div>
+        <h2>Voluntary Deductions</h2>
+        <hr>
+        <label *ngFor="let deduction of deductions">{{ deduction.deductionName }}</label>
+        <!-- <app-deduction
+          *ngFor="let deduction of paycheckScenario.deductions"
+          [label]="deduction.label"
+          [deduction]="deduction"
+        ></app-deduction> -->
+    </div>
+    <app-paycheck-scenario
+      *ngFor="let paycheckScenario of paycheckScenarios"
+      [paycheckScenario]="paycheckScenario"
+    ></app-paycheck-scenario>
+</div>
+

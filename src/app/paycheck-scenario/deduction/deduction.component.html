@@ -1,5 +1,5 @@
 <div class="deduction">
-  <label for="label">{{ label }}:</label>
+  <label for="label">{{ deduction.deductionName }}:</label>
   <p *ngIf="is401K()">Exmept from state and federal taxes.</p>
   <p *ngIf="isHsa()">Exmept from state, federal, and FICA taxes.</p>
   <p *ngIf="isTraditionalIra()">Exmept from state and federal taxes. Note: </p>

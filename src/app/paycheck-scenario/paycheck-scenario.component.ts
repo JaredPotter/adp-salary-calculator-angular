@@ -20,11 +20,14 @@ export class PaycheckScenarioComponent implements OnInit {
 
   ngOnInit() { }
 
-  // BIG TODO: Add in other filing status
   getStateFilingStatus(filingStatus: string) {
     switch(filingStatus) {
       case 'SINGLE':
         return 'S';
+      case 'MARRIED':
+        return 'M';
+      case 'MARRIED_USE_SINGLE_RATE':
+        return 'MH';
       default:
         return 'S';
     }

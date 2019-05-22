@@ -1,16 +1,13 @@
 <form (submit)="onSubmit(f)" #f="ngForm">
-    <h2>General Information</h2>
+    <h2 class="spacer">spacer</h2>
     <hr>
     <div>
-      <label for="name">Paycheck Scenario Name</label>
       <input type="text" name="name" [(ngModel)]="paycheckScenario.scenarioName">
     </div>
     <div>
-      <label for="date">Check Date:</label>
       <input type="date" name="date" [(ngModel)]="paycheckScenario.checkDate">
     </div>
     <div>
-      <label for="state">State</label>
       <select name="state" [(ngModel)]="paycheckScenario.state">
         <option value="AL">Alabama</option>
         <option value="AK">Alaska</option>
@@ -66,22 +63,18 @@
       </select>
     </div>
     <div>
-      <label for="grossPay">Gross Pay:</label>
       <input type="number" name="grossPay" [(ngModel)]="paycheckScenario.grossPay">
     </div>
     <div>
-      <label for="grossPayMethod">Gross Pay Method</label>
       <select name="grossPayMethod" [(ngModel)]="paycheckScenario.grossPayMethod">
         <option value="ANNUALLY" selected>Annually</option>
         <option value="PAY_PER_PERIOD">Pay Per Period</option>
       </select>
     </div>
     <div>
-      <label for="GrossPayYTD">Gross Pay YTD:</label>
       <input type="number" name="GrossPayYTD" [(ngModel)]="paycheckScenario.grossPayYTD">
     </div>
     <div>
-      <label for="payFrequency">Pay Frequency</label>
       <select name="payFrequency" [(ngModel)]="paycheckScenario.payFrequency">
         <option value="DAILY">Daily</option>
         <option value="WEEKLY">Weekly</option>
@@ -94,27 +87,28 @@
       </select>
     </div>
     <div>
-      <div>Exempt From:</div>
-      <label for="exemptFederal">Federal</label>
-      <select name="exemptFederal" [(ngModel)]="paycheckScenario.exemptFederal">
-        <option value="false" selected >No</option>
-        <option value="true">Yes</option>
-      </select>
-      <label for="exemptFica">Fica</label>
-      <select name="exemptFica" [(ngModel)]="paycheckScenario.exemptFica">
-        <option value="false" selected >No</option>
-        <option value="true">Yes</option>
-      </select>
-      <label for="exemptMedicare">Medicare</label>
-      <select name="exemptMedicare" [(ngModel)]="paycheckScenario.exemptMedicare">
-        <option value="false" selected >No</option>
-        <option value="true">Yes</option>
-      </select>
+      <div>
+        <select name="exemptFederal" [(ngModel)]="paycheckScenario.exemptFederal">
+          <option value="false" selected >No</option>
+          <option value="true">Yes</option>
+        </select>
+      </div>
+      <div>
+        <select name="exemptFica" [(ngModel)]="paycheckScenario.exemptFica">
+          <option value="false" selected >No</option>
+          <option value="true">Yes</option>
+        </select>
+      </div>
+      <div>
+        <select name="exemptMedicare" [(ngModel)]="paycheckScenario.exemptMedicare">
+          <option value="false" selected >No</option>
+          <option value="true">Yes</option>
+        </select>
+      </div>
     </div>
-    <h2>Federal Information</h2>
+    <h2 class="spacer">spacer</h2>
     <hr>
     <div>
-      <label for="federalFilingStatus">Federal Filing Status</label>
       <select name="federalFilingStatus" [(ngModel)]="paycheckScenario.federalFilingStatus">
         <option value="SINGLE" selected>Single</option>
         <option value="MARRIED">Married</option>
@@ -123,7 +117,6 @@
       </select>
     </div>
     <div>
-      <label for="numberOfFederalAllowances"># of Federal Allowances</label>
       <input
         type="number"
         name="numberOfFederalAllowances"
@@ -131,48 +124,41 @@
       >
     </div>
     <div>
-      <label for="additionalFederalWithholding">Additional Federal Withholding</label>
       <input type="number" name="additionalFederalWithholding" [(ngModel)]="paycheckScenario.additionalFederalWithholding">
     </div>
     <div>
-      <label for="roundFederalWithholding">Round Federal Withholding</label>
       <select name="roundFederalWithholding" [(ngModel)]="paycheckScenario.roundFederalWithholding">
         <option value="false" selected >No</option>
         <option value="true">Yes</option>
       </select>
     </div>
-    <h2>State Information</h2>
+    <h2 class="spacer">spacer</h2>
     <hr>
     <div>
-      <label for="exemptState">Exempt State</label>
       <select name="exemptState" [(ngModel)]="paycheckScenario.exemptState">
         <option value="false" selected >No</option>
         <option value="true">Yes</option>
       </select>
     </div>
     <div>
-      <label for="stateFilingStatus">Filing Status</label>
       <select name="stateFilingStatus" [(ngModel)]="paycheckScenario.stateFilingStatus">
         <option value="SINGLE" selected>Single</option>
         <option value="MARRIED">Married</option>
         <option value="MARRIED_USE_SINGLE_RATE">Married Use Single Rate</option>
-        <option value="NONRESIDENT_ALIEN">Nonresident Alian</option>
       </select>
     </div>
     <div>
-      <label for="additionalStateWithholding">Additional State Withholding</label>
       <input type="number" name="additionalStateWithholding" [(ngModel)]="paycheckScenario.additionalStateWithholding">
     </div>
-    <h2>Local Information</h2>
+    <h2 class="spacer">spacer</h2>
     <hr>
     <div>
       No Locale Information Required
     </div>
-    <h2>Voluntary Deductions</h2>
+    <h2 class="spacer">spacer</h2>
     <hr>
     <app-deduction
       *ngFor="let deduction of paycheckScenario.deductions"
-      [label]="deduction.label"
       [deduction]="deduction"
     ></app-deduction>
     <button type="submit">CALCULATE</button>
