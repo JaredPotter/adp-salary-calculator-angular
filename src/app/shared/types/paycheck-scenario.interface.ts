@@ -1,11 +1,12 @@
 import { VoluntaryDeductions } from './paycheck-scenario-request';
+import { Content } from './paycheck-scenario-response';
 
 export interface PaycheckScenario {
   scenarioName?: string,
-  checkDate: Date,
+  checkDate: number,
   state: string,
   grossPay: number,
-  grossPayMethod: string,
+  grossPayType: string,
   grossPayYTD: number,
   payFrequency: string,
   exemptFederal: boolean,
@@ -18,5 +19,6 @@ export interface PaycheckScenario {
   exemptState: boolean,
   stateFilingStatus: string,
   additionalStateWithholding: number,
-  deductions: VoluntaryDeductions[]
+  deductions: VoluntaryDeductions[],
+  results?: Content,
 }

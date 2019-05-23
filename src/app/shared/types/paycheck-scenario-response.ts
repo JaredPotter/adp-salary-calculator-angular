@@ -2,7 +2,7 @@ export interface PaycheckScenarioResponse {
   content: Content
 }
 
-interface Content {
+export interface Content {
   federal: number,
   medicare: number,
   fica: number,

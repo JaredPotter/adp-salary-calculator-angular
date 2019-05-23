@@ -6,8 +6,8 @@
   <label for="deductionAmount">Deduction Amount:</label>
   <input type="number" name="deductionAmount" [(ngModel)]="deduction.deductionAmount">
   <label for="deductionType">Deduction Type:</label>
-  <select name="deductionType" [(ngModel)]="deduction.deductionType">
-    <option value="PERCENT_OF_GROSS">% of Gross Pay</option>
+  <select name="deductionType" [(ngModel)]="deduction.deductionMethodType">
+    <option value="PERCENT_OF_GROSS" selected>% of Gross Pay</option>
     <option value="PERCENT_OF_NET">% of Net Pay</option>
     <option value="FIXED_AMOUNT">$ Fixed Amount</option>
     <option value="HOURLY_RATE">$ Hourly Rate</option>

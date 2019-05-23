@@ -1,3 +1,23 @@
 .spacer {
   color: rgba(255, 255, 255, 0);
 }
+
+form, form div {
+  padding: 4px;
+  border-bottom: 1px solid black;
+}
+
+form input, form select {
+  font-size: 12px;
+}
+
+.line-item {
+  height: 28px;
+  display: flex;
+  align-items: center;
+}
+
+.apart {
+  display: flex;
+  justify-content: space-between
+}

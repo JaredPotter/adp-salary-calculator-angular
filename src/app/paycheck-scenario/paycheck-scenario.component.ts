@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { PaycheckScenario } from '../shared/types/paycheck-scenario.interface';
 import { AdpApiServiceService } from '../shared/adp-api-service.service';
 import { PaycheckScenarioRequest, VoluntaryDeductions } from '../shared/types/paycheck-scenario-request';
+import { PaycheckScenarioResponse } from '../shared/types/paycheck-scenario-response';
 
 @Component({
   selector: 'app-paycheck-scenario',
@@ -34,13 +35,11 @@ export class PaycheckScenarioComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    const scenario = this.paycheckScenario;
-
     const body: PaycheckScenarioRequest = {
-      checkDate: this.paycheckScenario.checkDate.getTime(),
+      checkDate: this.paycheckScenario.checkDate,
       state: this.paycheckScenario.state,
       grossPay: String(this.paycheckScenario.grossPay),
-      grossPayType: this.paycheckScenario.grossPayMethod,
+      grossPayType: this.paycheckScenario.grossPayType,
       grossPayYTD: String(this.paycheckScenario.grossPayYTD),
       payFrequency: this.paycheckScenario.payFrequency,
       exemptFederal: String(this.paycheckScenario.exemptFederal),
@@ -72,30 +71,28 @@ export class PaycheckScenarioComponent implements OnInit {
       presetDeductions: [],
       presetImputed: [],
       print: {
-        "id": "",
-        "employeeName": "",
-        "employeeAddressLine1": "",
-        "employeeAddressLine2": "",
-        "employeeAddressLine3": "",
-        "checkNumber": "",
-        "checkNumberOnCheck": "false",
-        "checkDate": new Date().getTime(),
-        "remarks": "",
-        "companyNameOnCheck": "false",
-        "companyName": "",
-        "companyAddressLine1": "",
-        "companyAddressLine2": "",
-        "companyAddressLine3": "",
-        "emailReports": "false"
+        id: '',
+        employeeName: '',
+        employeeAddressLine1: '',
+        employeeAddressLine2: '',
+        employeeAddressLine3: '',
+        checkNumber: '',
+        checkNumberOnCheck: 'false',
+        checkDate: new Date().getTime(),
+        remarks: '',
+        companyNameOnCheck: 'false',
+        companyName: '',
+        companyAddressLine1: '',
+        companyAddressLine2: '',
+        companyAddressLine3: '',
+        emailReports: 'false',
       },
       rates: [],
       stockOptions: [],
     };
 
-    debugger;
-
     this.adpApiServiceService.postSalaryData(body).subscribe((data) => {
-      debugger;
+      this.paycheckScenario.results = (<PaycheckScenarioResponse>data).content;
     });
   }
 }

@@ -1,3 +1,18 @@
 .paycheck-scenario-compare-list-container {
   display: flex;
+
+  div {
+    padding: 4px;
+    border-bottom: 1px solid black;
+  }
+}
+
+.line-item {
+  height: 28px;
+  display: flex;
+  align-items: center;
+}
+
+h2 {
+  white-space: nowrap;
 }

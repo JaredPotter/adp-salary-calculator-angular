@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { DeductionComponent } from './paycheck-scenario/deduction/deduction.component';
 import { AdpApiServiceService } from './shared/adp-api-service.service';
+import { PercentRoundPipe } from './shared/pipes/percent-round.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AdpApiServiceService } from './shared/adp-api-service.service';
     PaycheckScenarioComponent,
     HeaderComponent,
     HomeComponent,
-    DeductionComponent
+    DeductionComponent,
+    PercentRoundPipe
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule

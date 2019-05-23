@@ -17,10 +17,43 @@ export class PaycheckScenarioCompareListComponent implements OnInit {
     this.paycheckScenarios = [
       {
         scenarioName: 'Navitaire 1',
-        checkDate: new Date(),
+        checkDate: new Date().getTime(),
         state: 'UT',
-        grossPay: 1000000,
-        grossPayMethod: 'ANNUALLY',
+        grossPay: 100000,
+        grossPayType: 'ANNUALLY',
+        grossPayYTD: 0,
+        payFrequency: 'SEMI_MONTHLY',
+        exemptFederal: false,
+        exemptFica: false,
+        exemptMedicare: false,
+        federalFilingStatus: 'SINGLE',
+        numberOfFederalAllowances: 1,
+        additionalFederalWithholding: 0,
+        roundFederalWithholding: false,
+        exemptState: false,
+        stateFilingStatus: 'SINGLE',
+        additionalStateWithholding: 0,
+        deductions: [
+          {
+            deductionName: '401K',
+            deductionAmount: String(38),
+            deductionMethodType: 'PERCENT_OF_GROSS',
+            benefitType: '401k'
+          },
+          {
+            deductionName: 'Health Savings Account - HSA',
+            deductionAmount: String(250),
+            deductionMethodType: 'FIXED_AMOUNT',
+            benefitType: 'hsa'
+          },
+        ],
+      },
+      {
+        scenarioName: 'Navitaire 2',
+        checkDate: new Date().getTime(),
+        state: 'UT',
+        grossPay: 100000,
+        grossPayType: 'ANNUALLY',
         grossPayYTD: 0,
         payFrequency: 'SEMI_MONTHLY',
         exemptFederal: false,
