@@ -34,6 +34,23 @@ export class PaycheckScenarioComponent implements OnInit {
     }
   }
 
+  getPayFrequencyWeeks(payFrequency: string) {
+    switch(payFrequency) {
+      case 'DAILY':
+        return 365;
+      case 'WEEKLY':
+        return 52;
+      case 'BI_WEEKLY':
+        return 26;
+      case 'SEMI_MONTHLY':
+        return 24;
+      case 'MONTHLY':
+        return 12;
+      default:
+        return 0;
+    }
+  }
+
   onSubmit(form: NgForm) {
     const body: PaycheckScenarioRequest = {
       checkDate: this.paycheckScenario.checkDate,
@@ -90,6 +107,18 @@ export class PaycheckScenarioComponent implements OnInit {
       rates: [],
       stockOptions: [],
     };
+
+    if(this.paycheckScenario.imputedIncome) {
+      // Calculate imputed income.
+      const imputedIncome = this.paycheckScenario.imputedIncome;
+      const payFrequency = this.paycheckScenario.payFrequency;
+      let annualImputedIncome = 0;
+      annualImputedIncome = imputedIncome * this.getPayFrequencyWeeks(payFrequency);
+      const grossPay = Number(body.grossPay);
+      const newGrossPay = grossPay + annualImputedIncome;
+      body.grossPay = String(newGrossPay);
+    }
+
 
     this.adpApiServiceService.postSalaryData(body).subscribe((data) => {
       this.paycheckScenario.results = (<PaycheckScenarioResponse>data).content;

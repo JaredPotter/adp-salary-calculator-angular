@@ -29,6 +29,10 @@ export interface VoluntaryDeductions {
   deductionAmount: string,
   deductionMethodType: string,
   ytdAmount?: string,
+  exemptFederal?: string,
+  exemptFica?: string,
+  exemptLocal?: string,
+  exemptState?: string
 }
 
 interface Print {
