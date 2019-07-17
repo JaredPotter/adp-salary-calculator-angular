@@ -51,6 +51,16 @@ export class PaycheckScenarioComponent implements OnInit {
     }
   }
 
+  getTotalTaxes() {
+    let sum = 0;
+    sum += this.paycheckScenario.results.federal;
+    sum += this.paycheckScenario.results.state;
+    sum += this.paycheckScenario.results.medicare;
+    sum += this.paycheckScenario.results.fica;
+
+    return sum;
+  }
+
   onSubmit(form: NgForm) {
     const body: PaycheckScenarioRequest = {
       checkDate: this.paycheckScenario.checkDate,
@@ -119,9 +129,39 @@ export class PaycheckScenarioComponent implements OnInit {
       body.grossPay = String(newGrossPay);
     }
 
+    // Calculate correct 401K amount.
+    let deduction401k = this.paycheckScenario.deductions.find((deduction) => {
+      if(deduction.benefitType === '401k' && deduction.deductionMethodType === 'PERCENT_OF_GROSS') {
+        return true
+      }
+    });
+
+    deduction401k = Object.assign({}, deduction401k);
+
+    if(deduction401k) {
+      const weeks = this.getPayFrequencyWeeks(this.paycheckScenario.payFrequency);
+      const grossCheck = this.paycheckScenario.grossPay / weeks;
+      const amount = (grossCheck * (Number(deduction401k.deductionAmount) / 100)).toFixed(2);
+      deduction401k.deductionMethodType = 'FIXED_AMOUNT';
+      deduction401k.deductionAmount = amount;
+    }
 
     this.adpApiServiceService.postSalaryData(body).subscribe((data) => {
-      this.paycheckScenario.results = (<PaycheckScenarioResponse>data).content;
+      let results = (<PaycheckScenarioResponse>data).content;
+
+      // Subtract imputed income.
+      results.netPay -= this.paycheckScenario.imputedIncome;
+
+      // Add credits.
+      let creditsSum = 0;
+
+      this.paycheckScenario.credits.forEach((credit) => {
+        creditsSum += credit.creditAmount;
+      });
+
+      results.netPay += creditsSum;
+
+      this.paycheckScenario.results = results;
     });
   }
 }

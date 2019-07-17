@@ -5,8 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PercentRoundPipe implements PipeTransform {
 
-  transform(value: number): number {
-    return Math.round(value);
+  transform(value: number): string {
+    return value.toFixed(2);
   }
-
 }

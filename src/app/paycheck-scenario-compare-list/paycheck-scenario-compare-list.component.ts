@@ -46,14 +46,14 @@ export class PaycheckScenarioCompareListComponent implements OnInit {
         deductions: [
           {
             deductionName: '401K',
-            deductionAmount: String(1583.33),
-            deductionMethodType: 'FIXED_AMOUNT',
-            // deductionAmount: String(38),
-            // deductionMethodType: 'PERCENT_OF_GROSS',
+            // deductionAmount: String(1583.33),
+            // deductionMethodType: 'FIXED_AMOUNT',
+            deductionAmount: String(38),
+            deductionMethodType: 'PERCENT_OF_GROSS',
             benefitType: '401k'
           },
           {
-            deductionName: 'Health Savings Account - HSA',
+            deductionName: 'HSA',
             deductionAmount: String(500),
             deductionMethodType: 'FIXED_AMOUNT',
             benefitType: 'hsa'
@@ -65,12 +65,13 @@ export class PaycheckScenarioCompareListComponent implements OnInit {
             benefitType: '_Custom',
             exemptFederal: 'true',
           },
-          // {
-          //   deductionName: 'Dental - Spouse',
-          //   deductionAmount: String(7.50),
-          //   deductionMethodType: 'FIXED_AMOUNT',
-          //   benefitType: '_Custom'
-          // },
+          {
+            deductionName: 'Dental - Spouse',
+            deductionAmount: String(7.50),
+            deductionMethodType: 'FIXED_AMOUNT',
+            benefitType: '_Custom',
+            exemptFederal: 'false',
+          },
           {
             deductionName: 'Medical - Self',
             deductionAmount: String(45.00),
@@ -78,12 +79,13 @@ export class PaycheckScenarioCompareListComponent implements OnInit {
             benefitType: '_Custom',
             exemptFederal: 'true',
           },
-          // {
-          //   deductionName: 'Medical - Spouse',
-          //   deductionAmount: String(46.50),
-          //   deductionMethodType: 'FIXED_AMOUNT',
-          //   benefitType: '_Custom'
-          // },
+          {
+            deductionName: 'Medical - Spouse',
+            deductionAmount: String(46.50),
+            deductionMethodType: 'FIXED_AMOUNT',
+            benefitType: '_Custom',
+            exemptFederal: 'false',
+          },
           {
             deductionName: 'Vision',
             deductionAmount: String(7.93),
