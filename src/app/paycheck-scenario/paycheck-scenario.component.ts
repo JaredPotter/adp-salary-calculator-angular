@@ -5,6 +5,7 @@ import { PaycheckScenario } from '../shared/types/paycheck-scenario.interface';
 import { AdpApiServiceService } from '../shared/adp-api-service.service';
 import { PaycheckScenarioRequest, VoluntaryDeductions } from '../shared/types/paycheck-scenario-request';
 import { PaycheckScenarioResponse } from '../shared/types/paycheck-scenario-response';
+import { ApiServiceService } from '../shared/api-service.service';
 
 @Component({
   selector: 'app-paycheck-scenario',
@@ -17,9 +18,11 @@ export class PaycheckScenarioComponent implements OnInit {
 
   deductions: {label: string, deductionType: string}[];
 
-  constructor(private adpApiServiceService: AdpApiServiceService) { }
+  constructor(private adpApiServiceService: AdpApiServiceService, private apiServiceService: ApiServiceService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    // Copy over parameters.
+  }
 
   getStateFilingStatus(filingStatus: string) {
     switch(filingStatus) {
@@ -162,6 +165,23 @@ export class PaycheckScenarioComponent implements OnInit {
       results.netPay += creditsSum;
 
       this.paycheckScenario.results = results;
+      this.paycheckScenario.results = (<PaycheckScenarioResponse>data).content;
+
+      // Update Existing.
+      if(this.paycheckScenario.id) {
+        this.apiServiceService.updateScenarioData(this.paycheckScenario)
+        .subscribe((response) => {
+          // do nothing.
+        });
+      }
+      else {
+        // Create New.
+        debugger;
+        this.apiServiceService.postScenarioData(this.paycheckScenario)
+        .subscribe((response: { name: string}) => {
+          this.paycheckScenario.id = response.name;
+        });
+      }
     });
   }
 }

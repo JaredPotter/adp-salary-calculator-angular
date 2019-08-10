@@ -1,5 +1,5 @@
 <div class="paycheck-scenario-compare-list-container">
-  <div>
+  <mat-card>
     <h2>General Information</h2>
     <hr>
     <div class="line-item">
@@ -68,10 +68,11 @@
     <h2>Voluntary Deductions</h2>
     <hr>
     <!-- <label *ngFor="let deduction of deductions">{{ deduction.deductionName }}</label> -->
-  </div>
+  </mat-card>
   <app-paycheck-scenario
     *ngFor="let paycheckScenario of paycheckScenarios"
     [paycheckScenario]="paycheckScenario"
   ></app-paycheck-scenario>
+  <button mat-raised-button mat-primary class="add-new-scenario-button" (click)="onAddNewScenario()">Add New Scenario</button>
 </div>
 

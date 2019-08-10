@@ -1,8 +1,11 @@
-<form (submit)="onSubmit(f)" #f="ngForm">
+<mat-card>
+  <form (submit)="onSubmit(f)" #f="ngForm">
     <h2 class="spacer">spacer</h2>
     <hr>
     <div class="line-item">
-      <input type="text" name="name" [(ngModel)]="paycheckScenario.scenarioName">
+      <mat-form-field>
+        <input matInput type="text" name="name" [(ngModel)]="paycheckScenario.scenarioName">
+      </mat-form-field>
     </div>
     <div class="line-item">
       <input type="date" name="date" [(ngModel)]="paycheckScenario.checkDate">
@@ -162,32 +165,32 @@
       *ngFor="let deduction of paycheckScenario.deductions"
       [deduction]="deduction"
     ></app-deduction>
-    <button type="submit">CALCULATE</button>
+    <button mat-raised-button mat-primary type="submit">CALCULATE</button>
     <div class="output" *ngIf="paycheckScenario.results">
       <div class="apart">
         <span>Gross Pay:</span>
         <span>${{ paycheckScenario.results.grossPay }}</span>
-        <span>({{ (paycheckScenario.results.grossPay / paycheckScenario.results.grossPay) * 100 | percentRound}}%)</span>
+        <span *ngIf="paycheckScenario.results.grossPay !== 0">({{ (paycheckScenario.results.grossPay / paycheckScenario.results.grossPay) * 100 | percentRound}}%)</span>
       </div>
       <div class="apart">
         <span>Federal Taxes:</span>
-        <span class="red">-${{ paycheckScenario.results.federal }}</span>
-        <span>({{ (paycheckScenario.results.federal / paycheckScenario.results.grossPay) * 100 | percentRound }}%)</span>
+        <span>${{ paycheckScenario.results.federal }}</span>
+        <span *ngIf="paycheckScenario.results.federal !== 0">({{ (paycheckScenario.results.federal / paycheckScenario.results.grossPay) * 100 | percentRound }}%)</span>
       </div>
       <div class="apart">
         <span>FICA Taxes:</span>
-        <span class="red">-${{ paycheckScenario.results.fica }}</span>
-        <span>({{ (paycheckScenario.results.fica / paycheckScenario.results.grossPay) * 100 | percentRound}}%)</span>
+        <span>${{ paycheckScenario.results.fica }}</span>
+        <span *ngIf="paycheckScenario.results.fica !== 0">({{ (paycheckScenario.results.fica / paycheckScenario.results.grossPay) * 100 | percentRound}}%)</span>
       </div>
       <div class="apart">
         <span>Medicate Taxes:</span>
-        <span class="red">-${{ paycheckScenario.results.medicare }}</span>
-        <span>({{ (paycheckScenario.results.medicare / paycheckScenario.results.grossPay) * 100  | percentRound}}%)</span>
+        <span>${{ paycheckScenario.results.medicare }}</span>
+        <span *ngIf="paycheckScenario.results.medicare !== 0">({{ (paycheckScenario.results.medicare / paycheckScenario.results.grossPay) * 100  | percentRound}}%)</span>
       </div>
       <div class="apart">
         <span>State Taxes:</span>
-        <span class="red">-${{ paycheckScenario.results.state }}</span>
-        <span>({{ (paycheckScenario.results.state / paycheckScenario.results.grossPay) * 100 | percentRound}}%)</span>
+        <span>${{ paycheckScenario.results.state }}</span>
+        <span *ngIf="paycheckScenario.results.state !== 0">({{ (paycheckScenario.results.state / paycheckScenario.results.grossPay) * 100 | percentRound}}%)</span>
       </div>
       <div class="apart">
         <span><strong>Total Taxes: </strong></span>
@@ -196,13 +199,14 @@
       </div>
       <div class="apart" *ngFor="let deduction of paycheckScenario.results.voluntaryDeductions">
         <span>{{ deduction.name }}:</span>
-        <span class="red">-${{ deduction.value }}</span>
-        <span>({{ (deduction.value / paycheckScenario.results.grossPay) * 100 | percentRound}}%)</span>
+        <span>${{ deduction.value }}</span>
+        <span *ngIf="paycheckScenario.results.grossPay !== 0">({{ (deduction.value / paycheckScenario.results.grossPay) * 100 | percentRound}}%)</span>
       </div>
       <div class="apart">
         <span>Net Pay:</span>
-        <span>${{ paycheckScenario.results.netPay.toFixed(2) }}</span>
-        <span>({{ (paycheckScenario.results.netPay / paycheckScenario.results.grossPay) * 100 | percentRound}}%)</span>
+        <span>${{ paycheckScenario.results.netPay }}</span>
+        <span *ngIf="paycheckScenario.results.grossPay !== 0">({{ (paycheckScenario.results.netPay / paycheckScenario.results.grossPay) * 100 | percentRound}}%)</span>
       </div>
     </div>
   </form>
+</mat-card>

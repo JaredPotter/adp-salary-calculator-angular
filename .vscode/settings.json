@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/40285082-d89a-481e-9eb5-4a0fbbcc60ae/resourceGroups/group1/providers/Microsoft.Web/sites/adp-salary-calculator-angular2",
+    "appService.deploySubpath": "dist/adp-salary-calculator-angular"
+}

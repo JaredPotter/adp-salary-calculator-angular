@@ -3,6 +3,7 @@ import { Content } from './paycheck-scenario-response';
 import { Credit } from './credit';
 
 export interface PaycheckScenario {
+  id?: string;
   imputedIncome?: number;
   scenarioName?: string;
   checkDate: number;

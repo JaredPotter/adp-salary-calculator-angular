@@ -1,6 +1,7 @@
 export interface Deduction {
-  label: string,
+  deductionName: string,
   deductionType: string
   type: string,
   deductionAmount: number
+  deductionMethodType: string
 }

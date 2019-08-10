@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { PaycheckScenario } from '../shared/types/paycheck-scenario.interface';
-import { AdpApiServiceService } from '../shared/adp-api-service.service';
+import { ApiServiceService } from '../shared/api-service.service';
 
 @Component({
   selector: 'app-paycheck-scenario-compare-list',
@@ -9,125 +9,114 @@ import { AdpApiServiceService } from '../shared/adp-api-service.service';
   styleUrls: ['./paycheck-scenario-compare-list.component.scss']
 })
 export class PaycheckScenarioCompareListComponent implements OnInit {
-  paycheckScenarios: PaycheckScenario[];
+  paycheckScenarios: PaycheckScenario[] = [];
 
-  constructor(private AdpApiServiceService: AdpApiServiceService) { }
+  constructor(private apiServicService: ApiServiceService) { }
 
   ngOnInit() {
-    this.paycheckScenarios = [
-      {
-        scenarioName: 'Scenario 1',
-        checkDate: new Date().getTime(),
-        state: 'UT',
-        grossPay: 100000,
-        grossPayType: 'ANNUALLY',
-        grossPayYTD: 0,
-        payFrequency: 'SEMI_MONTHLY',
-        exemptFederal: false,
-        exemptFica: false,
-        exemptMedicare: false,
-        federalFilingStatus: 'SINGLE',
-        numberOfFederalAllowances: 2,
-        additionalFederalWithholding: 0,
-        roundFederalWithholding: false,
-        exemptState: false,
-        stateFilingStatus: 'SINGLE',
-        additionalStateWithholding: 0,
-        imputedIncome: (270.13 + 9.04),
-        // imputedIncome: 9.04,
-        // imputedIncome: 270.13,
-        // imputedIncome: 0,
-        credits: [
-          {
-            creditName: 'Medical - Wellness Credit',
-            creditAmount: 25.00,
-          }
-        ],
-        deductions: [
-          {
-            deductionName: '401K',
-            // deductionAmount: String(1583.33),
-            // deductionMethodType: 'FIXED_AMOUNT',
-            deductionAmount: String(38),
-            deductionMethodType: 'PERCENT_OF_GROSS',
-            benefitType: '401k'
-          },
-          {
-            deductionName: 'HSA',
-            deductionAmount: String(500),
-            deductionMethodType: 'FIXED_AMOUNT',
-            benefitType: 'hsa'
-          },
-          {
-            deductionName: 'Dental - Self',
-            deductionAmount: String(7.50),
-            deductionMethodType: 'FIXED_AMOUNT',
-            benefitType: '_Custom',
-            exemptFederal: 'true',
-          },
-          {
-            deductionName: 'Dental - Spouse',
-            deductionAmount: String(7.50),
-            deductionMethodType: 'FIXED_AMOUNT',
-            benefitType: '_Custom',
-            exemptFederal: 'false',
-          },
-          {
-            deductionName: 'Medical - Self',
-            deductionAmount: String(45.00),
-            deductionMethodType: 'FIXED_AMOUNT',
-            benefitType: '_Custom',
-            exemptFederal: 'true',
-          },
-          {
-            deductionName: 'Medical - Spouse',
-            deductionAmount: String(46.50),
-            deductionMethodType: 'FIXED_AMOUNT',
-            benefitType: '_Custom',
-            exemptFederal: 'false',
-          },
-          {
-            deductionName: 'Vision',
-            deductionAmount: String(7.93),
-            deductionMethodType: 'FIXED_AMOUNT',
-            benefitType: '_Custom',
-            exemptFederal: 'true',
-          },
-        ],
-      },
-      // {
-      //   scenarioName: 'Scenario 2',
-      //   checkDate: new Date().getTime(),
-      //   state: 'UT',
-      //   grossPay: 100000,
-      //   grossPayType: 'ANNUALLY',
-      //   grossPayYTD: 0,
-      //   payFrequency: 'SEMI_MONTHLY',
-      //   exemptFederal: false,
-      //   exemptFica: false,
-      //   exemptMedicare: false,
-      //   federalFilingStatus: 'SINGLE',
-      //   numberOfFederalAllowances: 1,
-      //   additionalFederalWithholding: 0,
-      //   roundFederalWithholding: false,
-      //   exemptState: false,
-      //   stateFilingStatus: 'SINGLE',
-      //   additionalStateWithholding: 0,
-      //   deductions: [
-      //     {
-      //       deductionName: '401K',
-      //       deductionAmount: String(38),
-      //       deductionMethodType: 'PERCENT_OF_GROSS',
-      //       benefitType: '401k'
-      //     },
-      //     {
-      //       deductionName: 'Health Savings Account - HSA',
-      //       deductionAmount: String(250),
-      //       deductionMethodType: 'FIXED_AMOUNT',
-      //       benefitType: 'hsa'
-      //     },
-      //   ],
-      // },
-    ];
+    this.apiServicService.getScenarioData()
+    .subscribe((response) => {
+      for(let key in response) {
+        const scenario = <PaycheckScenario>response[key];
+        scenario.id = key;
+
+        this.paycheckScenarios.push(scenario);
+      }
+    });
+    // this.paycheckScenarios = [
+    //   {
+    //     // id: "id_1",
+    //     scenarioName: 'Navitaire 1',
+    //     checkDate: new Date().getTime(),
+    //     state: 'UT',
+    //     grossPay: 100000,
+    //     grossPayType: 'ANNUALLY',
+    //     grossPayYTD: 0,
+    //     payFrequency: 'SEMI_MONTHLY',
+    //     exemptFederal: false,
+    //     exemptFica: false,
+    //     exemptMedicare: false,
+    //     federalFilingStatus: 'SINGLE',
+    //     numberOfFederalAllowances: 1,
+    //     additionalFederalWithholding: 0,
+    //     roundFederalWithholding: false,
+    //     exemptState: false,
+    //     stateFilingStatus: 'SINGLE',
+    //     additionalStateWithholding: 0,
+    //     deductions: [
+    //       {
+    //         deductionName: '401K',
+    //         deductionAmount: String(38),
+    //         deductionMethodType: 'PERCENT_OF_GROSS',
+    //         benefitType: '401k'
+    //       },
+    //       {
+    //         deductionName: 'HSA',
+    //         deductionAmount: String(250),
+    //         deductionMethodType: 'FIXED_AMOUNT',
+    //         benefitType: 'hsa'
+    //       },
+    //     ],
+    //   },
+    //   {
+    //     // id: "id_1",
+    //     scenarioName: 'Navitaire 2',
+    //     checkDate: new Date().getTime(),
+    //     state: 'UT',
+    //     grossPay: 100000,
+    //     grossPayType: 'ANNUALLY',
+    //     grossPayYTD: 0,
+    //     payFrequency: 'SEMI_MONTHLY',
+    //     exemptFederal: false,
+    //     exemptFica: false,
+    //     exemptMedicare: false,
+    //     federalFilingStatus: 'SINGLE',
+    //     numberOfFederalAllowances: 1,
+    //     additionalFederalWithholding: 0,
+    //     roundFederalWithholding: false,
+    //     exemptState: false,
+    //     stateFilingStatus: 'SINGLE',
+    //     additionalStateWithholding: 0,
+    //     deductions: [
+    //       {
+    //         deductionName: '401K',
+    //         deductionAmount: String(38),
+    //         deductionMethodType: 'PERCENT_OF_GROSS',
+    //         benefitType: '401k'
+    //       },
+    //       {
+    //         deductionName: 'Health Savings Account - HSA',
+    //         deductionAmount: String(250),
+    //         deductionMethodType: 'FIXED_AMOUNT',
+    //         benefitType: 'hsa'
+    //       },
+    //     ],
+    //   },
+    // ];
+  }
+
+  onAddNewScenario() {
+    const scenario: PaycheckScenario = {
+      scenarioName: '',
+      checkDate: 1,
+      state: 'UT',
+      grossPay: 0,
+      grossPayType: 'ANNUALLY',
+      grossPayYTD: 0,
+      payFrequency: 'SEMI_MONTHLY',
+      exemptFederal: false,
+      exemptFica: false,
+      exemptMedicare: false,
+      federalFilingStatus: 'SINGLE',
+      numberOfFederalAllowances: 1,
+      additionalFederalWithholding: 0,
+      roundFederalWithholding: false,
+      exemptState: false,
+      stateFilingStatus: 'SINGLE',
+      additionalStateWithholding: 0,
+      deductions: [],
+    };
+
+    this.paycheckScenarios.push(scenario);
   }
 }
