@@ -5,6 +5,7 @@ import { Credit } from './credit';
 export interface PaycheckScenario {
   id?: string;
   imputedIncome?: number;
+  adjustmentCredit?: number;
   scenarioName?: string;
   checkDate: number;
   state: string;

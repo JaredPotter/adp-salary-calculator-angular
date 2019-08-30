@@ -66,9 +66,6 @@
       </select>
     </div>
     <div class="line-item">
-      <input type="number" name="imputedIncome" [(ngModel)]="paycheckScenario.imputedIncome">
-    </div>
-    <div class="line-item">
       <input type="number" name="grossPay" [(ngModel)]="paycheckScenario.grossPay">
     </div>
     <div class="line-item">
@@ -111,6 +108,12 @@
       </select>
     </div>
     <h2 class="spacer">spacer</h2>
+    <div class="line-item">
+      <input type="number" name="imputedIncome" [(ngModel)]="paycheckScenario.imputedIncome">
+    </div>
+    <div class="line-item">
+      <input type="number" name="adjustmentCredit" [(ngModel)]="paycheckScenario.adjustmentCredit">
+    </div>
     <hr>
     <div class="line-item">
       <select name="federalFilingStatus" [(ngModel)]="paycheckScenario.federalFilingStatus">

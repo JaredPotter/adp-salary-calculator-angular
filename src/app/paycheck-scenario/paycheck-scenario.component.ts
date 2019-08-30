@@ -158,9 +158,11 @@ export class PaycheckScenarioComponent implements OnInit {
       // Add credits.
       let creditsSum = 0;
 
-      this.paycheckScenario.credits.forEach((credit) => {
-        creditsSum += credit.creditAmount;
-      });
+      if(this.paycheckScenario.credits && this.paycheckScenario.credits.length > 0) {
+        this.paycheckScenario.credits.forEach((credit) => {
+          creditsSum += credit.creditAmount;
+        });
+      }
 
       results.netPay += creditsSum;
 
@@ -176,7 +178,6 @@ export class PaycheckScenarioComponent implements OnInit {
       }
       else {
         // Create New.
-        debugger;
         this.apiServiceService.postScenarioData(this.paycheckScenario)
         .subscribe((response: { name: string}) => {
           this.paycheckScenario.id = response.name;

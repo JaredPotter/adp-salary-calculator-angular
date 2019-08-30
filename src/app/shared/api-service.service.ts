@@ -17,7 +17,6 @@ export class ApiServiceService {
   }
 
   updateScenarioData(data: PaycheckScenario) {
-    debugger;
     return this.httpClient.put(this.baseUrl  + `/${data.id}.json`, data);
   }
 
